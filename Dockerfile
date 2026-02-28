@@ -1,9 +1,6 @@
-FROM ubuntu:22.04
+FROM nginx:alpine
 
-RUN apt-get update && apt-get install -y nginx && \
-    rm -rf /var/lib/apt/lists/*
-
-COPY index.html /var/www/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 EXPOSE 80
 
