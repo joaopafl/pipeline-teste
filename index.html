@@ -3,29 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <title>Pipeline Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --yellow: #FFD600;
+            --black: #111111;
+            --gray: #444;
+            --accent: #FF3B00;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Barlow Condensed', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #1a1a2e;
-            color: #fff;
+            min-height: 100vh;
+            background-color: var(--yellow);
+            background-image: repeating-linear-gradient(
+                45deg, transparent, transparent 40px,
+                rgba(0,0,0,0.03) 40px, rgba(0,0,0,0.03) 80px
+            );
+            color: var(--black);
+            overflow: hidden;
         }
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border: 6px solid var(--black);
+        }
+        body::before { top: 24px; left: 24px; border-right: none; border-bottom: none; }
+        body::after  { bottom: 24px; right: 24px; border-left: none; border-top: none; }
         .container {
             text-align: center;
+            padding: 3rem 4rem;
+            animation: fadeUp 0.8s ease both;
         }
-        h1 { color: #e94560; font-size: 3em; }
-        p  { font-size: 1.5em; color: #a8a8b3; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .badge {
+            display: inline-block;
+            background: var(--black);
+            color: var(--yellow);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            margin-bottom: 1.8rem;
+        }
+        h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        h1 span { color: var(--accent); }
+        .divider {
+            width: 80px;
+            height: 5px;
+            background: var(--black);
+            margin: 1.6rem auto;
+        }
+        .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-weight: 300;
+            color: var(--gray);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.6rem;
+        }
+        .new-line {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.4rem;
+            margin-bottom: 1.6rem;
+        }
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 2px solid var(--black);
+            padding: 0.3rem 0.8rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .tag:hover { background: var(--black); color: var(--yellow); }
+        .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #00C853;
+            margin-right: 6px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(1.4); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Bem-vindo à Esteira Pipeline!</h1>
-        <p>Deploy realizado com sucesso via CodeArts + Kubernetes</p>
-        <p><small>Cluster: staging | Namespace: default</small></p>
+        <div class="badge"><span class="status-dot"></span>Deploy Realizado com Sucesso</div>
+        <h1>Bem-vindo à<br><span>Esteira</span> Pipeline!</h1>
+        <div class="divider"></div>
+        <p class="subtitle">Deploy realizado via CodeArts + Kubernetes</p>
+        <p class="new-line">Laboratório Kubernetes &middot; Pipeline CodeArts &middot; GitHub ..... tudo isso na versão 2</p>
+        <div class="tags">
+            <span class="tag">Cluster: staging</span>
+            <span class="tag">Namespace: default</span>
+        </div>
     </div>
 </body>
 </html>
